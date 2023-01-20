@@ -15,6 +15,8 @@ const cardImages = [
 function App() {
   const [cards, setCards] = useState([])
   const [turns, setTurns] = useState(0)
+  const [firstChoice, setFirstChoice] = useState(null)
+  const [secondChoice, setSecondChoice] = useState(null)
 
 
   const shuffleCard = () => {
@@ -25,7 +27,10 @@ function App() {
     setCards(shuffledCards)
     setTurns(0)
   }
-  console.log(cards, turns);
+
+  const handleChoice = (card) => {
+    firstChoice ? setSecondChoice(card) : setFirstChoice(card)
+  }
 
   return (
     <div className="App">
@@ -37,6 +42,7 @@ function App() {
           <SingleCard
             key={card.id}
             card={card}
+            handleChoice={handleChoice}
           />
         ))}
       </div>

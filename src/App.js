@@ -26,6 +26,8 @@ function App() {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }))
 
+      setFirstChoice(null)
+      setSecondChoice(null)
     setCards(shuffledCards)
     setTurns(0)
   }
@@ -63,6 +65,10 @@ function App() {
     setDisabled(false)
   }
 
+  useEffect(() => {
+    shuffleCard()
+  }, [])
+
   return (
     <div className="App">
       <h1>Magic Match</h1>
@@ -79,6 +85,7 @@ function App() {
           />
         ))}
       </div>
+      <p>Turns: {turns}</p>
     </div>
   );
 }

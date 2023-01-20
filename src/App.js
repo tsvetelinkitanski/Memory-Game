@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useState } from 'react'
 import './App.css'
 import SingleCard from './components/SingleCard'
@@ -30,6 +31,24 @@ function App() {
 
   const handleChoice = (card) => {
     firstChoice ? setSecondChoice(card) : setFirstChoice(card)
+  }
+
+  useEffect(() => {
+    if (firstChoice && secondChoice) {
+      if (firstChoice.src === secondChoice.src) {
+        console.log('those cards match');
+        resetTurn()
+      } else {
+        console.log('those cards do not match');
+        resetTurn()
+      }
+    }
+  }, [firstChoice, secondChoice])
+
+  const resetTurn = () => {
+    setFirstChoice(null)
+    setSecondChoice(null)
+    setTurns(prevTurns => prevTurns + 1)
   }
 
   return (
